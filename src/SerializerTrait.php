@@ -92,4 +92,16 @@ trait SerializerTrait
 
         return $data;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supportsDenormalization($data, string $type, string $format = null, array $context = [])
+    {
+        if ($this->typeMapper) {
+            $type = $this->typeMapper->getClassByType($type);
+        }
+        
+        return parent::supportsDenormalization($data, $type, $format, $context);
+    }
 }
