@@ -19,6 +19,7 @@ trait TypedSerializerTrait
     use SerializerTrait {
         normalize as private doNormalize;
         denormalize as private doDenormalize;
+        supportsDenormalization as private doSupportsDenormalization;
     }
 
     public function normalize(mixed $data, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
@@ -29,5 +30,10 @@ trait TypedSerializerTrait
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
     {
         return $this->doDenormalize($data, $type, $format, $context);
+    }
+    
+    public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
+    {
+        return $this->doSupportsDenormalization($data, $type, $format, $context);
     }
 }
